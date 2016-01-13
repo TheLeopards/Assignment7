@@ -37,6 +37,10 @@ NDVI_annual <- transform(NDVI_annual, Avg_year = rowMeans(month, na.rm = TRUE))
 # finding municipality with highest average NDVI over the year
 annual_max <- NDVI_annual$NAME_2[which(NDVI_annual$Avg_year == max(NDVI_annual$Avg_year, na.rm=TRUE))]
 
+# Print results
+paste("The greenest municipality for month January is", jan_max)
+paste("The greenest municipality for month August is", aug_max)
+paste("The greenest municipality for the year is", annual_max)
 
 #plot results
 	# Masking MODIS data with NL country borders
@@ -46,47 +50,11 @@ NLmask <- mask(NLmodis[[1]], nlCountry_sinu)
 
 	# creating SpatialPolygonsDataFrame of municipalities with highest NDVI
 Jan_city <- nlMunicipality_sinu[nlMunicipality_sinu$NAME_2=="Littenseradiel",]
-Aug_city <- nlMunicipality_sinu[nlMunicipality_sinu$NAME_2=="Vorden",]
-Year_city <- nlMunicipality_sinu[nlMunicipality_sinu$NAME_2=="Graafstroom",]
 
 	# plotting January 
 plot(NLmask,  main = 'Greenest municipality in January')
 plot(Jan_city, add=TRUE)
 text(Jan_city, jan_max, adj=1.2)
 
-# plotting August 
-plot(NLmask,  main = 'Greenest municipality in August')
-plot(Aug_city, add=TRUE)
-text(Aug_city, aug_max, adj=1.2)
 
-# plotting Annual 
-plot(NLmask,  main = 'Greenest municipality during the year')
-plot(Year_city, add=TRUE)
-text(Year_city, annual_max, adj=1.2)
-
-
-#nnnnn <- mask(NLmask, city)
-#class(jan_max)
-#plot(city)
-
-
-#jan_max <- NDVI_jan_Mun$NAME_2[which(NDVI_jan_Mun$January == max(NDVI_jan_Mun$January, na.rm=TRUE))]
-
-
-#calculating annual average NDVI
-
-
-
-#annual_mean <- mean(NDVI_annual$January : NDVI_annual$December)
-
-#average <- function(x){
-#	avgNDVI <- mean(NDVI_annual$January : NDVI_annual$December)
-#	return(avgNDVI)
-#}
-#ajahds <- calc(NDVI_annual, fun=average)
-
-#cellStats(NLmodis, mean)
-
-#NLmodisSub <- mask(NLmodisUTM, nlCountry)
-#plot(NLmodis, 1)
 
