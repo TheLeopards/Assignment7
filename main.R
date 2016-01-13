@@ -2,6 +2,8 @@
 # 12th January 2016
 # Find the greenest municipality in The Netherlands
 
+# General instructions for running the script: Create the "data" folder inside your working directory
+
 library(raster)
 library(rgdal)
 
